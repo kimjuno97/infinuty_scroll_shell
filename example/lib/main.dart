@@ -27,16 +27,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _isLoading = false;
+
   final List<String> _list = List.generate(
-    100,
+    50,
     (index) => "$index",
   ).toList();
 
-  ScrollController _scrollController = ScrollController();
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
+  Future<void> _maxScrollExtentObserverFn() async {
+    if (_isLoading) return;
+    _isLoading = true;
+    setState(() {});
+    final addList =
+        List.generate(10, (index) => "${_list.length + index}").toList();
+    _list.addAll(addList);
+    setState(() {});
+    await Future.delayed(const Duration(milliseconds: 100));
+    _isLoading = false;
+    setState(() {});
   }
 
   @override
@@ -47,26 +55,22 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: InfinityScrollShell(
-        maxScrollExtentObserverFn: () {},
-        child: Column(
-          children: [
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _list.length,
-              itemBuilder: (context, index) {
-                final text = _list[index];
-                return Container(
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  child: Text(
-                    text,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                );
-              },
-            ),
-          ],
+        maxScrollExtentObserverFn: _maxScrollExtentObserverFn,
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: _list.length,
+          itemBuilder: (context, index) {
+            final text = _list[index];
+            return Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(
+                text,
+                style: const TextStyle(fontSize: 20),
+              ),
+            );
+          },
         ),
       ),
     );
