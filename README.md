@@ -4,20 +4,8 @@ InfinityScrollShell is a widget for Flutter applications that simplifies the imp
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
+- Usage
 
-  - [Basic Example](#basic-example)
-  - [Custom FAB Icon](#custom-fab-icon)
-  - [Disabling FAB](#disabling-fab)
+  - [Example](./example/lib/main.dart)
 
 - [License](./LICENSE)
-
-## Installation
-
-Add this line to your pubspec.yaml file:
-
-```yaml
-dependencies:
-  infinity_scroll_shell: ^1.0.0
-```

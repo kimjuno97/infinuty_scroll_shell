@@ -1,5 +1,5 @@
 name: infinity_scroll_shell
-description: "A new Flutter package project."
+description: A Flutter widget that simplifies infinite scrolling implementation with built-in data fetching and scroll-to-top functionality.
 version: 0.0.1
 homepage: "https://github.com/kimjuno97/infinuty_scroll_shell"
 
